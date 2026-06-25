@@ -56,7 +56,7 @@ Use esta configuração no Appium Inspector para abrir o APK no emulador Android
   "platformName": "Android",
   "appium:deviceName": "Android Emulator",
   "appium:automationName": "UIAutomator2",
-  "appium:app": "/Users/cristianofeitosa/Documents/Projects/udemy/QAx/yodaapp/app/yodapp-beta.apk",
+  "appium:app": "/Users/cristianofeitosa/Documents/Projects/udemy/QAx/yodaapp-robot/app/yodapp-beta.apk",
   "appium:udid": "emulator-5554",
   "appium:autoGrantPermissions": true
 }
