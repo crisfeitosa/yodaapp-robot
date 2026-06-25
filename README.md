@@ -1,4 +1,4 @@
-# YodaApp
+# YodaAppRobot
 
 Projeto de testes automatizados para mobile com [Appium](https://appium.io/).
 
