@@ -1,0 +1,15 @@
+{
+  "name": "yodaapp",
+  "version": "1.0.0",
+  "description": "Projeto de testes automatizados para mobile com appium",
+  "license": "ISC",
+  "author": "Cristiano Feitosa",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "appium": "^2.0.1"
+  }
+}
