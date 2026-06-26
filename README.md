@@ -41,6 +41,20 @@ Este repositório contém a base para automação de testes mobile da aplicaçã
    npx appium
    ```
 
+## Execucao dos testes
+
+Com o Appium em execucao, rode a suite Robot Framework:
+
+```bash
+robot -d ./logs tests/home.robot
+```
+
+Esse comando gera os artefatos de execucao em `logs/`:
+
+- `logs/output.xml`
+- `logs/log.html`
+- `logs/report.html`
+
 ## Sobre esses comandos
 
 - `npm i appium@2.0.1` instala o Appium 2 no projeto, garantindo uma versão fixa.
@@ -56,24 +70,33 @@ Use esta configuração no Appium Inspector para abrir o APK no emulador Android
   "platformName": "Android",
   "appium:deviceName": "Android Emulator",
   "appium:automationName": "UIAutomator2",
-  "appium:app": "/Users/cristianofeitosa/Documents/Projects/udemy/QAx/yodaapp-robot/app/yodapp-beta.apk",
+  "appium:app": "<CAMINHO_DO_PROJETO>/app/yodapp-beta.apk",
   "appium:udid": "emulator-5554",
   "appium:autoGrantPermissions": true
 }
 ```
+
+Substitua `<CAMINHO_DO_PROJETO>` pelo caminho onde voce clonou o repositorio na sua maquina.
 
 ## Estrutura
 
 ```text
 app/
   yodapp-beta.apk
+logs/
+   log.html
+   output.xml
+   report.html
+tests/
+   home.robot
 package.json
+README.md
 ```
 
 ## Próximos passos
 
-Este projeto ainda não possui suíte de testes implementada. Você pode adicionar a estrutura de testes e scripts no `package.json` conforme a evolução da automação.
+Expandir a suite atual com novos cenarios e centralizar a execucao em scripts no `package.json`.
 
 ## Observações
 
-O script `npm test` ainda está como placeholder e não executa testes reais.
+O script `npm test` ainda está como placeholder e não executa os testes Robot Framework.
