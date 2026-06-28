@@ -17,17 +17,21 @@ Deve realizar um click simples
   ...                autoGrantPermissions=true
 
   Wait Until Page Contains   ${START}    5
-  Click Text    ${START}
+  Click Text                 ${START}
 
-  ${hamburger}  Set Variable   xpath=//android.widget.ImageButton[@content-desc="Open navigation drawer"]
+  ${hamburger}    Set Variable    xpath=//android.widget.ImageButton[@content-desc="Open navigation drawer"]
 
   Wait Until Element Is Visible   ${hamburger}    5
-  Click Element   ${hamburger}
+  Click Element                   ${hamburger}
 
-  ${menu_item}  Set Variable   xpath=//*[@resource-id="com.qaxperience.yodapp:id/navView"]//*[@text="Clique em Botões"]
+  ${menu_item}  Set Variable      xpath=//*[@resource-id="com.qaxperience.yodapp:id/navView"]//*[@text="Clique em Botões"]
 
   Wait Until Element Is Visible   ${menu_item}    5
-  Click Element   ${menu_item}
+  Click Element                   ${menu_item}
+
+  Wait Until Page Contains        Clique simples    5
+  Click Text                      Clique simples
+  Wait Until Page Contains        Botão clique simples
 
   Sleep   5
 
