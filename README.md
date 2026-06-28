@@ -34,9 +34,23 @@ As versões usadas atualmente estão no `package.json`:
 - `appium`: `^2.19.0`
 - `appium-uiautomator2-driver`: `^2.45.1`
 
-## Execucao dos testes
+## Começo rápido
 
-Com o Appium em execucao, rode os cenarios Robot Framework:
+1. Suba o servidor Appium em um terminal:
+
+```bash
+npx appium
+```
+
+2. Em outro terminal, rode um teste Robot Framework:
+
+```bash
+robot -d ./logs tests/home.robot
+```
+
+## Execução dos testes
+
+Com o Appium em execução, rode os cenários Robot Framework:
 
 - Tela inicial:
 
@@ -56,23 +70,17 @@ Com o Appium em execucao, rode os cenarios Robot Framework:
   robot -d ./logs tests/checkbox.robot
   ```
 
-- Suite completa da pasta `tests/`:
+- Suíte completa da pasta `tests/`:
 
   ```bash
   robot -d ./logs tests/
   ```
 
-Esses comandos geram os artefatos de execucao em `logs/`:
+Esses comandos geram os artefatos de execução em `logs/`:
 
 - `logs/output.xml`
 - `logs/log.html`
 - `logs/report.html`
-
-## Sobre esses comandos
-
-- `npm install` instala Appium e o driver UiAutomator2 definidos no projeto.
-- `npx appium` sobe o servidor para que os testes possam se conectar.
-- `robot -d ./logs <arquivo.robot>` executa os testes e gera os relatórios em `logs/`.
 
 ## Appium Inspector
 
@@ -89,7 +97,7 @@ Use esta configuração no Appium Inspector para abrir o APK no emulador Android
 }
 ```
 
-Substitua `<CAMINHO_DO_PROJETO>` pelo caminho onde voce clonou o repositorio na sua maquina.
+Substitua `<CAMINHO_DO_PROJETO>` pelo caminho onde você clonou o repositório na sua máquina.
 
 ## Estrutura
 
@@ -110,11 +118,17 @@ README.md
 
 ## Próximos passos
 
-Expandir a suite atual com novos cenarios e centralizar a execucao em scripts no `package.json`.
+Expandir a suíte atual com novos cenários e centralizar a execução em scripts no `package.json`.
 
 ## Observações
 
 O script `npm test` ainda está como placeholder e não executa os testes Robot Framework.
+
+Exemplo de execução por arquivo:
+
+```bash
+robot -d ./logs tests/checkbox.robot
+```
 
 ## Troubleshooting
 
@@ -136,3 +150,6 @@ O script `npm test` ainda está como placeholder e não executa os testes Robot 
   ```robot
   Click Element    xpath=//android.widget.CheckBox[contains(@text, "Ruby")]
   ```
+
+- `NoSuchDriverError` / sessão não inicia no Android:
+  confirme que o dispositivo está ativo e acessível com `adb devices` e que o `udid` configurado corresponde ao emulador/dispositivo em uso.
