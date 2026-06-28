@@ -2,6 +2,9 @@
 
 Library          AppiumLibrary
 
+*** Variables ***
+${START}     QAX
+
 *** Test Cases ***
 Deve realizar um click simples
 
@@ -13,9 +16,8 @@ Deve realizar um click simples
   ...                uid=emulator-5554
   ...                autoGrantPermissions=true
 
-  Wait Until Page Contains   Yodapp    10
-  
-  Click Text    QAX
+  Wait Until Page Contains   ${START}    5
+  Click Text    ${START}
 
   Sleep   5
 
