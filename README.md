@@ -13,7 +13,7 @@ Este repositório contém a base para automação de testes mobile da aplicaçã
 - Java JDK instalado e configurado
 - Android Studio com Android SDK
 - Emulador Android ou dispositivo físico conectado
-- Appium 2 instalado globalmente ou via `npx`
+- Appium 2 instalado no projeto (via npm)
 
 ## Instalação
 
@@ -23,23 +23,16 @@ Este repositório contém a base para automação de testes mobile da aplicaçã
    npm install
    ```
 
-2. Instale o Appium na versão usada pelo projeto:
-
-   ```bash
-   npm i appium@2.0.1
-   ```
-
-3. Instale o driver Android do Appium:
-
-   ```bash
-   npx appium driver install uiautomator2@2.0.5
-   ```
-
-4. Inicie o servidor do Appium:
+2. Inicie o servidor do Appium:
 
    ```bash
    npx appium
    ```
+
+As versões usadas atualmente estão no `package.json`:
+
+- `appium`: `^2.19.0`
+- `appium-uiautomator2-driver`: `^2.45.1`
 
 ## Execucao dos testes
 
@@ -47,6 +40,12 @@ Com o Appium em execucao, rode a suite Robot Framework:
 
 ```bash
 robot -d ./logs tests/home.robot
+```
+
+Para executar o cenário de clique:
+
+```bash
+robot -d ./logs tests/click.robot
 ```
 
 Esse comando gera os artefatos de execucao em `logs/`:
@@ -57,9 +56,9 @@ Esse comando gera os artefatos de execucao em `logs/`:
 
 ## Sobre esses comandos
 
-- `npm i appium@2.0.1` instala o Appium 2 no projeto, garantindo uma versão fixa.
-- `npx appium driver install uiautomator2@2.0.5` instala o driver Android compatível com o Appium 2.
+- `npm install` instala Appium e o driver UiAutomator2 definidos no projeto.
 - `npx appium` sobe o servidor para que os testes possam se conectar.
+- `robot -d ./logs <arquivo.robot>` executa os testes e gera os relatórios em `logs/`.
 
 ## Appium Inspector
 
@@ -88,6 +87,7 @@ logs/
    output.xml
    report.html
 tests/
+   click.robot
    home.robot
 package.json
 README.md
@@ -100,3 +100,15 @@ Expandir a suite atual com novos cenarios e centralizar a execucao em scripts no
 ## Observações
 
 O script `npm test` ainda está como placeholder e não executa os testes Robot Framework.
+
+## Troubleshooting
+
+- `EADDRINUSE: address already in use 0.0.0.0:4723`:
+  existe outra instância do Appium rodando. Finalize a instância atual ou suba em outra porta:
+
+  ```bash
+  npx appium -p 4725
+  ```
+
+- `NotOpenSSLWarning` (urllib3/LibreSSL no macOS):
+  é um warning do ambiente Python local. Não necessariamente bloqueia a execução dos testes, mas pode ser eliminado usando Python com OpenSSL 1.1.1+.
