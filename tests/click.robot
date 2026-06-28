@@ -19,6 +19,11 @@ Deve realizar um click simples
   Wait Until Page Contains   ${START}    5
   Click Text    ${START}
 
+  ${hamburger}  Set Variable   xpath=//android.widget.ImageButton[@content-desc="Open navigation drawer"]
+
+  Wait Until Element Is Visible   ${hamburger}    5
+  Click Element   ${hamburger}
+
   Sleep   5
 
   Close Application
