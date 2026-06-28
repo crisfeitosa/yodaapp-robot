@@ -33,6 +33,7 @@ Deve realizar um click simples
   Click Text                      Clique simples
   Wait Until Page Contains        Botão clique simples
 
-  Sleep   5
+  Click Text                      CLIQUE SIMPLES
+  Wait Until Page Contains        Isso é um clique simples
 
   Close Application
