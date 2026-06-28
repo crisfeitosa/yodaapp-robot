@@ -24,6 +24,11 @@ Deve realizar um click simples
   Wait Until Element Is Visible   ${hamburger}    5
   Click Element   ${hamburger}
 
+  ${menu_item}  Set Variable   xpath=//*[@resource-id="com.qaxperience.yodapp:id/navView"]//*[@text="Clique em Botões"]
+
+  Wait Until Element Is Visible   ${menu_item}    5
+  Click Element   ${menu_item}
+
   Sleep   5
 
   Close Application
