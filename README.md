@@ -36,19 +36,33 @@ As versões usadas atualmente estão no `package.json`:
 
 ## Execucao dos testes
 
-Com o Appium em execucao, rode a suite Robot Framework:
+Com o Appium em execucao, rode os cenarios Robot Framework:
 
-```bash
-robot -d ./logs tests/home.robot
-```
+- Tela inicial:
 
-Para executar o cenário de clique:
+  ```bash
+  robot -d ./logs tests/home.robot
+  ```
 
-```bash
-robot -d ./logs tests/click.robot
-```
+- Clique simples e clique longo:
 
-Esse comando gera os artefatos de execucao em `logs/`:
+  ```bash
+  robot -d ./logs tests/click.robot
+  ```
+
+- Checkbox (techs Appium):
+
+  ```bash
+  robot -d ./logs tests/checkbox.robot
+  ```
+
+- Suite completa da pasta `tests/`:
+
+  ```bash
+  robot -d ./logs tests/
+  ```
+
+Esses comandos geram os artefatos de execucao em `logs/`:
 
 - `logs/output.xml`
 - `logs/log.html`
@@ -87,6 +101,7 @@ logs/
    output.xml
    report.html
 tests/
+   checkbox.robot
    click.robot
    home.robot
 package.json
@@ -112,3 +127,12 @@ O script `npm test` ainda está como placeholder e não executa os testes Robot 
 
 - `NotOpenSSLWarning` (urllib3/LibreSSL no macOS):
   é um warning do ambiente Python local. Não necessariamente bloqueia a execução dos testes, mas pode ser eliminado usando Python com OpenSSL 1.1.1+.
+
+- `InvalidSelectorException` com XPath no Android:
+  se o seletor for um locator (ex.: `xpath=...`), use `Click Element` em vez de `Click Text`.
+
+  Exemplo:
+
+  ```robot
+  Click Element    xpath=//android.widget.CheckBox[contains(@text, "Ruby")]
+  ```
