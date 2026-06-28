@@ -10,9 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "appium": "^2.0.1"
+    "appium": "^2.19.0"
   },
   "devDependencies": {
-    "appium-uiautomator2-driver": "^2.0.5"
+    "appium-uiautomator2-driver": "^2.45.1"
   }
 }
