@@ -1,48 +1,44 @@
 # YodaAppRobot
 
-Projeto de testes automatizados para mobile com [Appium](https://appium.io/).
+Projeto de automação de testes mobile com Robot Framework + Appium para o app Yodapp.
 
 ## Visão geral
 
-Este repositório contém a base para automação de testes mobile da aplicação Yodapp. O APK de teste está disponível em `app/yodapp-beta.apk`.
+Este repositório contém cenários de testes mobile Android. O APK utilizado nos testes está em `app/yodapp-beta.apk`.
 
 ## Pré-requisitos
 
-- Node.js 16+ ou superior
+- Node.js 16+
 - npm
+- Python 3.9+
+- Robot Framework instalado no ambiente Python
 - Java JDK instalado e configurado
 - Android Studio com Android SDK
 - Emulador Android ou dispositivo físico conectado
-- Appium 2 instalado no projeto (via npm)
 
 ## Instalação
 
-1. Instale as dependências do projeto:
+1. Instale as dependências Node (Appium e driver Android):
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-2. Inicie o servidor do Appium:
+2. Instale o Robot Framework no Python ativo (se ainda não estiver instalado):
 
-   ```bash
-   npx appium
-   ```
-
-As versões usadas atualmente estão no `package.json`:
-
-- `appium`: `^2.19.0`
-- `appium-uiautomator2-driver`: `^2.45.1`
+```bash
+pip install robotframework robotframework-appiumlibrary
+```
 
 ## Começo rápido
 
-1. Suba o servidor Appium em um terminal:
+1. Inicie o Appium em um terminal:
 
 ```bash
 npx appium
 ```
 
-2. Em outro terminal, rode um teste Robot Framework:
+2. Execute um cenário em outro terminal:
 
 ```bash
 robot -d ./logs tests/home.robot
@@ -50,41 +46,48 @@ robot -d ./logs tests/home.robot
 
 ## Execução dos testes
 
-Com o Appium em execução, rode os cenários Robot Framework:
+Com o Appium em execução, use:
 
 - Tela inicial:
 
-  ```bash
-  robot -d ./logs tests/home.robot
-  ```
+```bash
+robot -d ./logs tests/home.robot
+```
 
 - Clique simples e clique longo:
 
-  ```bash
-  robot -d ./logs tests/click.robot
-  ```
+```bash
+robot -d ./logs tests/click.robot
+```
 
 - Checkbox (techs Appium):
 
-  ```bash
-  robot -d ./logs tests/checkbox.robot
-  ```
+```bash
+robot -d ./logs tests/checkbox.robot
+```
 
-- Suíte completa da pasta `tests/`:
+- Suíte completa:
 
-  ```bash
-  robot -d ./logs tests/
-  ```
+```bash
+robot -d ./logs tests/
+```
 
-Esses comandos geram os artefatos de execução em `logs/`:
+Relatórios gerados em `logs/`:
 
 - `logs/output.xml`
 - `logs/log.html`
 - `logs/report.html`
 
+## Versões atuais
+
+Dependências definidas no projeto:
+
+- `appium`: `^2.19.0`
+- `appium-uiautomator2-driver`: `^2.45.1`
+
 ## Appium Inspector
 
-Use esta configuração no Appium Inspector para abrir o APK no emulador Android:
+Configuração de capabilities para abrir o app no Android:
 
 ```json
 {
@@ -97,59 +100,56 @@ Use esta configuração no Appium Inspector para abrir o APK no emulador Android
 }
 ```
 
-Substitua `<CAMINHO_DO_PROJETO>` pelo caminho onde você clonou o repositório na sua máquina.
+Substitua `<CAMINHO_DO_PROJETO>` pelo caminho local do repositório.
 
-## Estrutura
+## Estrutura do projeto
 
 ```text
 app/
   yodapp-beta.apk
 logs/
-   log.html
-   output.xml
-   report.html
+  log.html
+  output.xml
+  report.html
+resources/
+  base.resource
 tests/
-   checkbox.robot
-   click.robot
-   home.robot
+  checkbox.robot
+  click.robot
+  home.robot
 package.json
 README.md
 ```
 
-## Próximos passos
-
-Expandir a suíte atual com novos cenários e centralizar a execução em scripts no `package.json`.
-
 ## Observações
 
-O script `npm test` ainda está como placeholder e não executa os testes Robot Framework.
-
-Exemplo de execução por arquivo:
-
-```bash
-robot -d ./logs tests/checkbox.robot
-```
+- O script `npm test` ainda é placeholder e não executa os testes Robot Framework.
+- Sempre mantenha um emulador/dispositivo ativo antes de iniciar a suíte.
 
 ## Troubleshooting
 
-- `EADDRINUSE: address already in use 0.0.0.0:4723`:
-  existe outra instância do Appium rodando. Finalize a instância atual ou suba em outra porta:
+- `EADDRINUSE: address already in use 0.0.0.0:4723`
+  Já existe uma instância do Appium usando a porta 4723. Inicie em outra porta:
 
-  ```bash
-  npx appium -p 4725
-  ```
+```bash
+npx appium -p 4725
+```
 
-- `NotOpenSSLWarning` (urllib3/LibreSSL no macOS):
-  é um warning do ambiente Python local. Não necessariamente bloqueia a execução dos testes, mas pode ser eliminado usando Python com OpenSSL 1.1.1+.
+- `InvalidSelectorException` com XPath no Android
+  Se o valor informado for locator (`xpath=...`), use `Click Element` em vez de `Click Text`.
 
-- `InvalidSelectorException` com XPath no Android:
-  se o seletor for um locator (ex.: `xpath=...`), use `Click Element` em vez de `Click Text`.
+```robot
+Click Element    xpath=//android.widget.CheckBox[contains(@text, "Ruby")]
+```
 
-  Exemplo:
+- `NoSuchDriverError` / sessão não inicia no Android
+  Verifique se o dispositivo está disponível em:
 
-  ```robot
-  Click Element    xpath=//android.widget.CheckBox[contains(@text, "Ruby")]
-  ```
+```bash
+adb devices
+```
 
-- `NoSuchDriverError` / sessão não inicia no Android:
-  confirme que o dispositivo está ativo e acessível com `adb devices` e que o `udid` configurado corresponde ao emulador/dispositivo em uso.
+E confirme se o `udid` corresponde ao emulador/dispositivo em uso.
+
+- `NotOpenSSLWarning` (urllib3/LibreSSL no macOS)
+  É um warning do ambiente Python local. Em geral não bloqueia os testes, mas pode ser removido usando Python com OpenSSL 1.1.1+.
