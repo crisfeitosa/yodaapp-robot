@@ -44,6 +44,13 @@ npx appium
 robot -d ./logs tests/home.robot
 ```
 
+## Checklist antes de rodar
+
+- Emulador/dispositivo Android ativo
+- `adb devices` listando ao menos 1 device como `device`
+- Servidor Appium em execução
+- APK disponível em `app/yodapp-beta.apk`
+
 ## Execução dos testes
 
 Com o Appium em execução, use:
@@ -72,11 +79,19 @@ robot -d ./logs tests/checkbox.robot
 robot -d ./logs tests/
 ```
 
+- Executar apenas testes com tag `long`:
+
+```bash
+robot -d ./logs -i long tests/
+```
+
 Relatórios gerados em `logs/`:
 
 - `logs/output.xml`
 - `logs/log.html`
 - `logs/report.html`
+
+Dica: para manter histórico de execuções, use uma pasta por rodada, por exemplo `-d ./logs/run-01`.
 
 ## Versões atuais
 
