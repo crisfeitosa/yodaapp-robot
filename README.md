@@ -67,10 +67,34 @@ robot -d ./logs tests/home.robot
 robot -d ./logs tests/click.robot
 ```
 
-- Checkbox (techs Appium):
+- Login:
+
+```bash
+robot -d ./logs tests/login.robot
+```
+
+- Checkbox:
 
 ```bash
 robot -d ./logs tests/checkbox.robot
+```
+
+- Radio button:
+
+```bash
+robot -d ./logs tests/radio.robot
+```
+
+- Spinner:
+
+```bash
+robot -d ./logs tests/spinner.robot
+```
+
+- Swipe:
+
+```bash
+robot -d ./logs tests/swipe.robot
 ```
 
 - Suíte completa:
@@ -132,6 +156,10 @@ tests/
   checkbox.robot
   click.robot
   home.robot
+  login.robot
+  radio.robot
+  spinner.robot
+  swipe.robot
 package.json
 README.md
 ```
